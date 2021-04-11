@@ -2,11 +2,14 @@ package com.example.finch.pojo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.finch.converters.Converter
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "employees")
+@TypeConverters(value = [Converter::class])
 data class Employee (
 
     @PrimaryKey(autoGenerate = true)
@@ -28,7 +31,7 @@ data class Employee (
     @Expose
     val avatrUrl: String? = null,
 
-//    @SerializedName("specialty")
-//    @Expose
-//    val specialty: List<Specialty>? = null
+    @SerializedName("specialty")
+    @Expose
+    val specialty: List<Specialty>? = null
 )

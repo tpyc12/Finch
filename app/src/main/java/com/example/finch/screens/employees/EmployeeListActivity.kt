@@ -1,12 +1,14 @@
 package com.example.finch.screens.employees
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.finch.R
 import com.example.finch.adapters.EmployeeAdapter
 import com.example.finch.databinding.ActivityMainBinding
+import com.example.finch.pojo.Specialty
 
 class EmployeeListActivity : AppCompatActivity() {
 
@@ -26,6 +28,16 @@ class EmployeeListActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this)[EmployeeViewModel::class.java]
         viewModel.employees.observe(this, {
             adapter.employees = it
+            if (it != null) {
+                for (employee in it) {
+                    val specialities: List<Specialty>? = employee.specialty
+                    if (specialities != null) {
+                        for (specialty in specialities) {
+                            Log.i("Specialty", specialty.name.toString())
+                        }
+                    }
+                }
+            }
         })
         viewModel.errors.observe(this, {
             if (it != null) {
